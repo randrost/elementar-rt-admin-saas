@@ -1,18 +1,11 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './guard/auth.guard';
+// import { authGuard } from './guard/auth.guard';
+// import {noAuthGuard} from '@/guard/no-auth.guard';
 
 export const routes: Routes = [
   {
-    path: 'login/check',
-    loadComponent: () => import('./login-check/login-check.component').then(c => c.LoginCheckComponent)
-  },
-  {
-    path: 'login',
-    loadComponent: () => import('./login/login.component').then(c => c.LoginComponent)
-  },
-  {
-    path: 'logout',
-    loadComponent: () => import('./logout/logout.component').then(c => c.LogoutComponent)
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
     path: 'error',
@@ -21,14 +14,24 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./common/common.component').then(c => c.CommonComponent),
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     children: [
       {
         path: '',
         pathMatch: 'full',
         loadComponent: () => import('./main/main.component').then(c => c.MainComponent),
         title: 'Home'
-      }
+      },
+      // {
+      //   path: 'overview',
+      //   loadComponent: () => import('./overview/overview.component').then(c => c.OverviewComponent),
+      //   title: 'Overview'
+      // },
+      // {
+      //   path: 'users',
+      //   loadComponent: () => import('./users/users.component').then(m => m.UsersComponent),
+      //   title: 'Users'
+      // }
     ]
   },
   {

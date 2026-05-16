@@ -1,7 +1,8 @@
 export const environment = {
   siteUrl: 'https://localhost:4200',
   googleAnalyticsId: 'G-LZYWG6MYJ4',
-  pageTitle: 'Elementar Admin / SaaS layout',
+  fullAppName: 'Elementar RT SaaS Layout',
+  shortAppName: 'Elementar RT',
   pageMeta: {
     keywords: [],
     description: '',

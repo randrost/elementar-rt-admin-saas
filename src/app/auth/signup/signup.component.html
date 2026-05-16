@@ -1,0 +1,47 @@
+<div class="flex flex-wrap h-screen mat-typography">
+  <div class="flex w-full flex-col md:w-1/2 h-screen">
+    <div>
+      <a emr-logo routerLink="/" class="mt-7 ms-8">{{ environment.shortAppName }}</a>
+    </div>
+    <div class="grow px-10 md:px-20 flex items-center justify-center overflow-y-auto">
+      <div class="w-[500px]">
+        <h2>Sign up</h2>
+        <p class="text-sm mt-3 text-neutral-500">
+          Let's get started with your account. Please fill in the details below to create your account.
+        </p>
+        <form class="flex flex-col pt-3 md:pt-8" [formGroup]="form" (ngSubmit)="signUp()">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input type="name" matInput formControlName="name">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" autocomplete="off">
+            <mat-hint align="end" aria-live="polite">
+              {{ form.controls.password.value?.length }} / 8
+            </mat-hint>
+          </mat-form-field>
+          <emr-password-strength #passwordStrengthComponent [password]="form.controls.password.value!"></emr-password-strength>
+          <emr-password-strength-info [passwordComponent]="passwordStrengthComponent"></emr-password-strength-info>
+
+          <button mat-flat-button color="primary" type="submit" class="!h-12 mt-4" [disabled]="form.invalid">Sign Up</button>
+        </form>
+        <div class="pt-12 text-center">
+          <p class="whitespace-nowrap text-xs">
+            <span class="inline-block me-1 text-neutral-600 dark:text-neutral-400">Already have an account?</span>
+            <a routerLink="/auth/sign-in" class="underline-offset-4 font-semibold text-neutral-800 dark:text-neutral-300
+                                              underline hover:text-accent dark:hover:text-accent">Sign in</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pointer-events-none relative hidden h-screen flex items-center
+              justify-center select-none bg-surface-container md:flex md:w-1/2">
+    <img class="z-1 max-w-[80%] w-full mx-auto" ngSrc="assets/onboarding/step1.svg" alt="Onboarding" fill>
+  </div>
+</div>

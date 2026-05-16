@@ -4,9 +4,10 @@ import { filter } from 'rxjs';
 import {
   AnalyticsService,
   InactivityTrackerService,
-} from '@elementar-ui/components/core';
-import { TextLogoComponent } from '@elementar-ui/components/logo';
-import { SplashScreenComponent } from '@elementar-ui/components/splash-screen';
+} from '@elementar-rt/components/core';
+import { TextLogoComponent } from '@elementar-rt/components/logo';
+import { SplashScreenComponent } from '@elementar-rt/components/splash-screen';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -47,4 +48,6 @@ export class AppComponent {
       ;
     });
   }
+
+  protected readonly environment = environment;
 }

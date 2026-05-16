@@ -18,6 +18,15 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
+      "@interface/*": [
+        "./src/app/interface/*"
+      ],
+      "@service/*": [
+        "./src/app/service/*"
+      ],
+      "@guard/*": [
+        "./src/app/guard/*"
+      ],
       "@/*": [
         "./src/app/*"
       ]

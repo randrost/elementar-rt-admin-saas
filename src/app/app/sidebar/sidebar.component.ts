@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, viewChild } from '@angular/core';
+import {Component, inject, OnInit, viewChild, WritableSignal} from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 import { Location } from '@angular/common';
@@ -10,11 +10,14 @@ import {
   SidebarNavComponent, SidebarNavDividerComponent,
   SidebarNavItemComponent,
   SidebarNavItemIconDirective
-} from '@elementar-ui/components/sidebar';
+} from '@elementar-rt/components/sidebar';
 import { MatIconButton } from '@angular/material/button';
-import { IconComponent } from '@elementar-ui/components/icon';
-import { LayoutApiService } from '@elementar-ui/components/layout';
-import { LogoComponent } from '@elementar-ui/components/logo';
+import { IconComponent } from '@elementar-rt/components/icon';
+import { LayoutApiService } from '@elementar-rt/components/layout';
+import { LogoComponent } from '@elementar-rt/components/logo';
+import {environment} from '../../../environments/environment.development';
+import {NavigationService} from '@service/navigation.service';
+import {toObservable} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-sidebar',
@@ -39,73 +42,29 @@ import { LogoComponent } from '@elementar-ui/components/logo';
   }
 })
 export class SidebarComponent implements OnInit {
-  private _layoutApi = inject(LayoutApiService);
   router = inject(Router);
   location = inject(Location);
-  height: string | null = '200px';
+  private _layoutApi = inject(LayoutApiService);
+  private _navigationService = inject(NavigationService);
 
-  readonly navigation = viewChild.required<any>('navigation');
-
-  navItems: any[] = [
-    {
-      key: 'home',
-      type: 'link',
-      name: 'Home',
-      icon: 'ph:house-duotone',
-      link: '/'
-    },
-    {
-      key: 'item-menu-1',
-      type: 'item',
-      name: 'Item menu 1',
-    },
-    {
-      key: 'item-menu-2',
-      type: 'item',
-      name: 'Item menu 2',
-    },
-    {
-      key: 'divider',
-      type: 'divider'
-    },
-    {
-      key: 'item-menu-3',
-      type: 'item',
-      name: 'Item menu 3',
-    },
-    {
-      key: 'item-menu-4',
-      type: 'item',
-      name: 'Item menu 4',
-    },
-  ];
+  navItems: WritableSignal<any[]> = this._navigationService.navItems;
   navItemLinks: any[] = [];
-  footerNavItems: any[] = [
-    {
-      key: 'help',
-      type: 'link',
-      name: 'Help Center',
-      icon: 'ph:question-duotone',
-      link: '/help'
-    },
-    {
-      key: 'docs',
-      type: 'link',
-      name: 'Documentation',
-      icon: 'ph:lifebuoy-duotone',
-      link: '/docs'
-    },
-  ];
+  footerNavItems: WritableSignal<any[]> = this._navigationService.footerNavItems;
   activeKey: any = 'home';
 
-  ngOnInit() {
-    this.navItems.forEach(navItem => {
-      this.navItemLinks.push(navItem);
+  constructor() {
+    toObservable(this.navItems).subscribe((items) => {
+      items.forEach(navItem => {
+        this.navItemLinks.push(navItem);
 
-      if (navItem.children) {
-        this.navItemLinks = this.navItemLinks.concat(navItem.children as any[]);
-      }
+        if (navItem.children) {
+          this.navItemLinks = this.navItemLinks.concat(navItem.children as any[]);
+        }
+      });
     });
+  }
+
+  ngOnInit() {
     this._activateLink();
     this.router.events
       .pipe(
@@ -134,4 +93,6 @@ export class SidebarComponent implements OnInit {
       this.activeKey = null;
     }
   }
+
+  protected readonly environment = environment;
 }

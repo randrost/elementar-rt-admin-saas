@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { DicebearComponent } from '@elementar-ui/components/avatar';
+import { DicebearComponent } from '@elementar-rt/components/avatar';
 import {
   Notification,
   NotificationActorComponent,
@@ -9,7 +9,7 @@ import {
   NotificationContentComponent,
   NotificationMessageComponent,
   NotificationTimeComponent
-} from '@elementar-ui/components/notifications';
+} from '@elementar-rt/components/notifications';
 import { MatRipple } from '@angular/material/core';
 
 @Component({

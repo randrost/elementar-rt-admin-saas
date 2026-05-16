@@ -7,22 +7,22 @@ import { MatDivider } from '@angular/material/divider';
 import { MatTooltip } from '@angular/material/tooltip';
 import { NotificationsPopoverComponent } from '../notifications-popover/notifications-popover.component';
 import { RouterLink } from '@angular/router';
-import { DicebearComponent } from '@elementar-ui/components/avatar';
-import { PopoverTriggerForDirective } from '@elementar-ui/components/popover';
-import { SoundEffectDirective } from '@elementar-ui/components/core';
+import { DicebearComponent } from '@elementar-rt/components/avatar';
+import { PopoverTriggerForDirective } from '@elementar-rt/components/popover';
+import { SoundEffectDirective } from '@elementar-rt/components/core';
 import {
   BreadcrumbItemComponent,
   BreadcrumbItemIconDirective,
   BreadcrumbsComponent,
   BreadcrumbSeparatorComponent
-} from '@elementar-ui/components/breadcrumbs';
-import { IconComponent } from '@elementar-ui/components/icon';
-import { LayoutApiService } from '@elementar-ui/components/layout';
+} from '@elementar-rt/components/breadcrumbs';
+import { IconComponent } from '@elementar-rt/components/icon';
+import { LayoutApiService } from '@elementar-rt/components/layout';
 import {
   ColorSchemeDarkDirective,
   ColorSchemeLightDirective,
   ColorSchemeSwitcherComponent
-} from '@elementar-ui/components/color-scheme';
+} from '@elementar-rt/components/color-scheme';
 
 @Component({
   selector: 'app-header',
@@ -61,8 +61,8 @@ export class HeaderComponent implements OnInit {
 
   get currentUser(): any {
     return {
-      displayName: 'Pavel Salauyou',
-      email: 'elementarlabs@gmail.com',
+      displayName: 'John Doe',
+      email: 'email@example.com',
       photoURL: ''
     };
   }

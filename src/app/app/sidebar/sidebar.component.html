@@ -1,13 +1,13 @@
 <emr-sidebar>
   <emr-sidebar-header class="h-18">
-    <a routerLink="/" emr-logo>ELEMENTAR</a>
+    <a routerLink="/" emr-logo>{{ environment.shortAppName }}</a>
     <button mat-icon-button (click)="toggleSidebar()">
       <emr-icon name="ph:list"/>
     </button>
   </emr-sidebar-header>
   <emr-sidebar-body>
     <emr-sidebar-nav [activeKey]="activeKey">
-      @for (navItem of navItems; track navItem) {
+      @for (navItem of navItems(); track navItem) {
         @switch (navItem.type) {
           @case ('link') {
             <a emr-sidebar-nav-item [routerLink]="navItem.link" [key]="navItem.key">
@@ -38,7 +38,7 @@
   </emr-sidebar-body>
   <emr-sidebar-footer>
     <emr-sidebar-nav [activeKey]="activeKey">
-      @for (navItem of footerNavItems; track navItem) {
+      @for (navItem of footerNavItems(); track navItem) {
         <a emr-sidebar-nav-item [routerLink]="navItem.link" [key]="navItem.key">
           <ng-container emrSidebarNavItemIcon>
             @if (navItem.icon) {
